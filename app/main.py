@@ -8,7 +8,7 @@ class Person:
 
 
 def create_person_list(people: list) -> list:
-    Person.people = {}
+    Person.people.clear()
 
     person_list = []
 
@@ -22,14 +22,14 @@ def create_person_list(people: list) -> list:
         name = person_data["name"]
         person = Person.people[name]
 
-        if "wife" in person_data:
-            wife_name = person_data["wife"]
-            if wife_name and wife_name in Person.people:
-                person.wife = Person.people[wife_name]
+        if "wife" in person_data and person_data["wife"]:
+            spouse = Person.people.get(person_data["wife"])
+            if spouse:
+                person.wife = spouse
 
-        if "husband" in person_data:
-            husband_name = person_data["husband"]
-            if husband_name and husband_name in Person.people:
-                person.husband = Person.people[husband_name]
+        if "husband" in person_data and person_data["husband"]:
+            spouse = Person.people.get(person_data["husband"])
+            if spouse:
+                person.husband = spouse
 
     return person_list
